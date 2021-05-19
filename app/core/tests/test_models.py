@@ -70,7 +70,7 @@ class ModelTests(TestCase):
         recipe = models.Recipe.objects.create(
             user=sample_user(),
             title='Recipe Title',
-            time=5,
+            time_minutes=5,
             price=10.2,
         )
         self.assertEqual(str(recipe), recipe.title)
