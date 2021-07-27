@@ -2,8 +2,7 @@ from rest_framework import viewsets, mixins, authentication, permissions
 from recipe.serializers import TagSerializer, IngredientSerializer, \
     RecipeSerializer, RecipeDetailSerializer
 from core.models import Tag, Ingredient, Recipe
-from rest_framework.response import Response
-from rest_framework import status
+
 
 class BaseRecipeAttrViewSet(viewsets.GenericViewSet,
                             mixins.ListModelMixin,
