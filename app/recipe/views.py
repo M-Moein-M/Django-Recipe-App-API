@@ -2,7 +2,8 @@ from rest_framework import viewsets, mixins, authentication, permissions
 from recipe.serializers import TagSerializer, IngredientSerializer, \
     RecipeSerializer, RecipeDetailSerializer
 from core.models import Tag, Ingredient, Recipe
-
+from rest_framework.response import Response
+from rest_framework import status
 
 class BaseRecipeAttrViewSet(viewsets.GenericViewSet,
                             mixins.ListModelMixin,
@@ -32,7 +33,8 @@ class IngredientViewSet(BaseRecipeAttrViewSet):
     queryset = Ingredient.objects.all()
 
 
-class RecipeViewSet(viewsets.ModelViewSet):
+class RecipeViewSet(viewsets.ModelViewSet,
+                    mixins.CreateModelMixin):
     """Manage recipe objects"""
     serializer_class = RecipeSerializer
     queryset = Recipe.objects.all()
@@ -49,3 +51,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return RecipeDetailSerializer
 
         return self.serializer_class
+
+    def perform_create(self, serializer):
+        """Create new recipe"""
+        serializer.save(user=self.request.user)
