@@ -32,8 +32,7 @@ class IngredientViewSet(BaseRecipeAttrViewSet):
     queryset = Ingredient.objects.all()
 
 
-class RecipeViewSet(viewsets.ModelViewSet,
-                    mixins.CreateModelMixin):
+class RecipeViewSet(viewsets.ModelViewSet):
     """Manage recipe objects"""
     serializer_class = RecipeSerializer
     queryset = Recipe.objects.all()
